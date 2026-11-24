@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MastLLM — Tiny language models</title>
+<meta name="description" content="MastLLM builds open, tiny language models — small specialists for code and chat that run on the hardware you already own.">
+<meta name="theme-color" content="#0F2A1E">
+<meta property="og:title" content="MastLLM — Tiny language models, built to run anywhere">
+<meta property="og:description" content="Small specialists, built to beat bigger generalists at their job. The team behind openTARS.">
+<meta property="og:image" content="https://mastllm.github.io/og.png">
+<meta property="og:url" content="https://mastllm.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:Inter;src:url(fonts/InterVariable.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:Plex;src:url(fonts/plexmono-500.woff2) format("woff2");font-weight:500;font-display:swap}
+:root{--bg:#0F2A1E;--raised:#163526;--ink:#E7F0E9;--muted:#9DB5A6;--hair:#2A4A39;--accent:#B6E33C;color-scheme:dark}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 18px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.w{max-width:1040px;margin:0 auto;padding:0 24px}
+.mono{font-family:Plex,ui-monospace,monospace;font-weight:500}
+header{display:flex;align-items:center;justify-content:space-between;padding:28px 0}
+.brand{display:flex;align-items:center;gap:12px;font-weight:600;font-size:22px;letter-spacing:-.01em;text-decoration:none}
+.brand b{font-weight:400}
+nav{display:flex;gap:24px;font-size:15px}
+nav a{color:var(--muted);text-decoration:none}
+nav a:hover{color:var(--ink)}
+.k{display:flex;align-items:center;gap:10px;color:var(--accent);font-size:14px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:22px}
+.k i{width:10px;height:10px;background:var(--accent)}
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center;padding:72px 0 96px}
+h1{font-weight:600;font-size:clamp(40px,6.4vw,76px);line-height:1;letter-spacing:-.04em}
+h2{font-weight:600;font-size:clamp(30px,4vw,46px);line-height:1.08;letter-spacing:-.03em;max-width:760px}
+.lead{color:var(--muted);font-size:21px;margin-top:26px;max-width:600px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.btn{display:inline-block;padding:13px 22px;font-weight:600;font-size:16px;text-decoration:none;border:2px solid var(--accent)}
+.btn.p{background:var(--accent);color:var(--bg)}
+.btn:hover{filter:brightness(1.08)}
+.sail{width:100%;height:auto;max-width:340px;justify-self:center}
+section{padding:88px 0;border-top:1px solid var(--hair)}
+section p.b{color:var(--muted);font-size:20px;margin-top:22px;max-width:700px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:44px}
+.grid>div{background:var(--bg);padding:28px}
+.n{color:var(--accent);font-size:14px}
+.it{font-weight:600;font-size:21px;margin-top:10px}
+.d{color:var(--muted);font-size:16px;margin-top:8px}
+.fam{margin-top:44px;border-top:1px solid var(--hair)}
+.fam>div{display:grid;grid-template-columns:260px 1fr auto;gap:20px;align-items:center;padding:20px 0;border-bottom:1px solid var(--hair)}
+.fam .id{font-size:19px}
+.tag{font-size:12px;color:var(--accent);border:1px solid var(--accent);padding:4px 10px;white-space:nowrap}
+.vals{grid-template-columns:repeat(4,1fr)}
+.tars{background:var(--raised);padding:44px;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
+.tars h2{font-size:clamp(26px,3vw,36px)}
+footer{border-top:1px solid var(--hair);padding:40px 0 56px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;color:var(--muted);font-size:15px}
+footer .l{display:flex;gap:22px;flex-wrap:wrap}
+footer a{text-decoration:none}
+footer a:hover{color:var(--ink)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr;padding:40px 0 64px}
+  .sail{display:none}
+  .grid,.vals{grid-template-columns:1fr}
+  .fam>div{grid-template-columns:1fr auto}
+  .fam .d{grid-column:1/-1;grid-row:2;margin-top:0}
+  nav{display:none}
+  section{padding:64px 0}
+  .tars{padding:28px}
+}
+</style>
+</head>
+<body>
+<div class="w">
+<header>
+  <a class="brand" href="./" aria-label="MastLLM home">
+    <svg width="26" height="28" viewBox="0 0 63 66" aria-hidden="true"><rect width="3" height="66" fill="#E7F0E9"/><g transform="translate(7,2)" fill="#B6E33C"><rect y="0" width="8" height="8"/><rect y="10" width="8" height="8"/><rect x="10" y="10" width="8" height="8"/><rect y="20" width="8" height="8"/><rect x="10" y="20" width="8" height="8"/><rect x="20" y="20" width="8" height="8"/><rect y="30" width="8" height="8"/><rect x="10" y="30" width="8" height="8"/><rect x="20" y="30" width="8" height="8"/><rect x="30" y="30" width="8" height="8"/><rect y="40" width="8" height="8"/><rect x="10" y="40" width="8" height="8"/><rect x="20" y="40" width="8" height="8"/><rect x="30" y="40" width="8" height="8"/><rect x="40" y="40" width="8" height="8"/><rect y="50" width="8" height="8"/><rect x="10" y="50" width="8" height="8"/><rect x="20" y="50" width="8" height="8"/><rect x="30" y="50" width="8" height="8"/><rect x="40" y="50" width="8" height="8"/><rect x="50" y="50" width="8" height="8" fill="#E7F0E9"/></g></svg>
+    <span>mast<b>llm</b></span>
+  </a>
+  <nav aria-label="Sections">
+    <a href="#mission">Mission</a><a href="#family">Models</a><a href="#values">Values</a><a href="#opentars">openTARS</a>
+  </nav>
+</header>
+
+<main>
+<div class="hero">
+  <div>
+    <div class="k mono"><i></i>Tiny language models</div>
+    <h1>Small specialists, built to beat bigger generalists.</h1>
+    <p class="lead">Open language models up to ~1B parameters, for code and chat, that run on the hardware you already own: a CPU, a laptop, a phone, a small board.</p>
+    <div class="cta">
+      <a class="btn p" href="https://huggingface.co/Mast-LLM">Follow on Hugging Face</a>
+      <a class="btn" href="https://github.com/MastLLM">GitHub</a>
+    </div>
+  </div>
+  <img class="sail" src="mast-mark.svg" alt="MastLLM logo: a mast with a sail made of token squares" width="340" height="340">
+</div>
+
+<section id="why">
+  <div class="k mono"><i></i>Why we exist</div>
+  <h2>AI keeps getting bigger. Tiny models get left behind.</h2>
+  <p class="b">The big labs race to ever larger models. Small ones ship as an afterthought, if at all. Someone has to build them properly. That&rsquo;s us.</p>
+</section>
+
+<section id="mission">
+  <div class="k mono"><i></i>How we build</div>
+  <h2>Make tiny models genuinely useful.</h2>
+  <div class="grid">
+    <div><div class="n mono">01</div><div class="it">One shared base</div><p class="d">Every Mast model starts from the same compact foundation.</p></div>
+    <div><div class="n mono">02</div><div class="it">Specialists</div><p class="d">Each model is trained for one job: Python, the terminal, the web, chat.</p></div>
+    <div><div class="n mono">03</div><div class="it">Beat the bigger ones</div><p class="d">A specialist ships only when it wins its job against larger general models.</p></div>
+  </div>
+</section>
+
+<section id="family">
+  <div class="k mono"><i></i>The Mast family</div>
+  <h2>Mast-1, in the works.</h2>
+  <div class="fam">
+    <div><span class="id mono">Mast-1-Base</span><span class="d">The shared foundation</span><span class="tag mono">In the works</span></div>
+    <div><span class="id mono">Mast-1-Coder</span><span class="d">Writes and fixes Python</span><span class="tag mono">In the works</span></div>
+    <div><span class="id mono">Mast-1-Shell</span><span class="d">Terminal commands</span><span class="tag mono">Coming soon</span></div>
+    <div><span class="id mono">Mast-1-Web</span><span class="d">JavaScript and TypeScript</span><span class="tag mono">Coming soon</span></div>
+    <div><span class="id mono">Mast-1-Chat</span><span class="d">Chat in English and Portuguese</span><span class="tag mono">Coming soon</span></div>
+  </div>
+</section>
+
+<section id="values">
+  <div class="k mono"><i></i>What we stand for</div>
+  <h2>Our values.</h2>
+  <div class="grid vals">
+    <div><div class="it">Local first</div><p class="d">Your code and your chats stay on your machine.</p></div>
+    <div><div class="it">Open</div><p class="d">Weights you can download, run and inspect.</p></div>
+    <div><div class="it">Measured</div><p class="d">Every number comes from a test the model never saw.</p></div>
+    <div><div class="it">Small on purpose</div><p class="d">Less memory, less power, more places it runs.</p></div>
+  </div>
+</section>
+
+<section id="opentars">
+  <div class="tars">
+    <div>
+      <div class="k mono"><i></i>Our first product</div>
+      <h2>openTARS keeps going, now as a MastLLM product.</h2>
+      <p class="b">Our desktop assistant, local by default, on Linux, Windows and macOS.</p>
+    </div>
+    <a class="btn p" href="https://mastllm.github.io/OpenTARS/">Get openTARS</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <span>MastLLM · The team behind openTARS</span>
+  <div class="l">
+    <a href="https://github.com/MastLLM">GitHub</a>
+    <a href="https://huggingface.co/Mast-LLM">Hugging Face</a>
+    <a href="https://www.instagram.com/open.tars/">Instagram</a>
+    <a href="mailto:projectopentars@gmail.com">Contact</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>
